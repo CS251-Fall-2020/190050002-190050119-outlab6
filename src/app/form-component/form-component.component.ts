@@ -61,7 +61,7 @@ export class FormComponentComponent implements OnInit {
     this.getFormdata();
     this.signupForm.valueChanges.subscribe(
       data => {
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         this.dataIn.name = data.name;
         this.dataIn.email = data.email;
         this.dataIn.feedback = data.feedback;
@@ -119,8 +119,8 @@ export class FormComponentComponent implements OnInit {
         },
         err => console.log(err),
         () => {
-          console.log('done loading');
-          console.log(this.initial);
+          //console.log('done loading');
+          //console.log(this.initial);
           
         }
       );
