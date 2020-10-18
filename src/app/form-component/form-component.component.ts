@@ -46,6 +46,11 @@ export class FormComponentComponent implements OnInit {
   initial: User;
   dataIn = new data;
   dataPost: string;
+  display= new data;
+  name1: string;
+  email1: string;
+  feed1: string;
+  comment1: string; 
 
 
   constructor(private formSendService: FormSendService) { }
@@ -58,6 +63,10 @@ export class FormComponentComponent implements OnInit {
       feedback: new FormControl('Great'),
       comments: new FormControl('Give your comments'),
     });
+    this.display.name = "your name";
+    this.display.email = "your email";
+    this.display.feedback = 'Great';
+    this.display.comment = 'Give your comments';
     this.getFormdata();
     this.signupForm.valueChanges.subscribe(
       data => {
@@ -81,9 +90,14 @@ export class FormComponentComponent implements OnInit {
 
 
     this.formSendService.postFormdata(this.dataIn).subscribe(
-        response => {
-        console.log(response);
-
+        (response: User) => {
+        //console.log(response);
+        this.name1 = response.name;
+        this.email1 = response.email;
+        this.feed1 = response.feedback;
+        this.comment1 = response.comment;
+        //console.log(this.comment1);
+        //console.log(response.name);
         this.dataPost = JSON.stringify(response);
         alert("Submission Successful! ^_^ \nHere's what we received from you: \n"+this.dataPost);
 
@@ -103,12 +117,10 @@ export class FormComponentComponent implements OnInit {
     getFormdata() {
       this.formSendService.getFormdata().subscribe(
         (data: User) => {
-          this.initial = {
-          name: (data as any).name,
-          email: (data as any).email,
-          feedback: (data as any).feedback,
-          comment: (data as any).comment,
-          }
+          this.display.name = data.name;
+          this.display.email = data.email;
+          this.display.feedback = data.feedback;
+          this.display.comment = data.comment;
           this.signupForm.patchValue({
             user_name: (data as any).name,
             user_email: (data as any).email,
@@ -127,10 +139,10 @@ export class FormComponentComponent implements OnInit {
     }
 
     
-  get email() { return this.signupForm.get('user_email').value; }
-  get name() { return this.signupForm.get('user_name').value; }
-  get feedback() { return this.signupForm.get('feedback').value; }
-  get comment() { return this.signupForm.get('comments').value; }
+  get email() { return this.email1; }
+  get name() { return this.name1; }
+  get feedback() { return this.display.feedback; }
+  get comment() { return this.display.comment; }
     
   }
     
