@@ -47,10 +47,7 @@ export class FormComponentComponent implements OnInit {
   dataIn = new data;
   dataPost: string;
   display= new data;
-  name1: string;
-  email1: string;
-  feed1: string;
-  comment1: string; 
+   
 
 
   constructor(private formSendService: FormSendService) { }
@@ -90,14 +87,11 @@ export class FormComponentComponent implements OnInit {
 
 
     this.formSendService.postFormdata(this.dataIn).subscribe(
-        (response: User) => {
+        (response: data) => {
         //console.log(response);
-        this.name1 = response.name;
-        this.email1 = response.email;
-        this.feed1 = response.feedback;
-        this.comment1 = response.comment;
-        //console.log(this.comment1);
-        //console.log(response.name);
+        this.display = response;
+        //console.log("oooooooooooo");
+        //console.log(this.name1);
         this.dataPost = JSON.stringify(response);
         alert("Submission Successful! ^_^ \nHere's what we received from you: \n"+this.dataPost);
 
@@ -117,10 +111,7 @@ export class FormComponentComponent implements OnInit {
     getFormdata() {
       this.formSendService.getFormdata().subscribe(
         (data: User) => {
-          this.display.name = data.name;
-          this.display.email = data.email;
-          this.display.feedback = data.feedback;
-          this.display.comment = data.comment;
+          this.display = data;
           this.signupForm.patchValue({
             user_name: (data as any).name,
             user_email: (data as any).email,
@@ -139,8 +130,8 @@ export class FormComponentComponent implements OnInit {
     }
 
     
-  get email() { return this.email1; }
-  get name() { return this.name1; }
+  get email() { return this.display.email; }
+  get name() { return this.display.name; }
   get feedback() { return this.display.feedback; }
   get comment() { return this.display.comment; }
     
