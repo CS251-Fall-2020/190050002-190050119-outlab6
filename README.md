@@ -1,5 +1,8 @@
 # 190050002-190050119-outlab6
 
+Link to this repository is - https://github.com/CS251-Fall-2020/190050002-190050119-outlab6<br>
+Link to the repo we have been working on while collaborating is - https://github.com/jsum007/AngularOutlab
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
 
 ## Development server
